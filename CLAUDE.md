@@ -10,14 +10,16 @@ Read README.md first: it is the product and architecture source of truth.
 - Children's data: no ads, no profiling, no cross-school profiles; sharing only through guardian CONSENT_GRANT.
 - Never use Aadhaar as an identifier. National/state IDs (UDISE+, EMIS, APAAR) are optional linked fields.
 - UI strings go through i18n (ta, en) from day one.
+- No facial recognition of children. Voice notes deleted after transcription; scanned register images deleted after confirmation + retention window.
+- Mermaid diagrams in README must render: avoid reserved ids (e.g. Class, end) and validate before pushing.
 
 ## Status
 - [ ] M0 Clickable demo
-- [ ] M1 Foundation
-- [ ] M2 Daily core
+- [ ] M1 Foundation + Snap-to-Digitise
+- [ ] M2 Daily core + Digital diary & permission slips
 - [ ] M3 Fees & payments
-- [ ] M4 Bus tracking
-- [ ] M5 WhatsApp + AI assistant
+- [ ] M4 Transport + Safe Handover + Custody Chain
+- [ ] M5 Voice-first Tamil assistant + two-way translated messaging
 - [ ] M6 Identity & records
 
 ## Decisions log

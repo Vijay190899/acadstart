@@ -1,141 +1,230 @@
+<div align="center">
+
 # AcadStart
 
 **One platform for the whole school day: for management, teachers, parents and students.**
-Fees, attendance, homework, live school-bus tracking, verifiable student records and a Tamil + English AI assistant, built mobile-first for Indian schools. Launching first in Tamil Nadu.
 
-> **Status:** 🧪 Prototype / design phase. This README is the product and technical blueprint for the prototype. Code will land module by module, following the [game plan](#7-game-plan).
+*Know where your child is at every handover · talk to the school by voice in your own language · switch from paper in a day.*
+
+![Status](https://img.shields.io/badge/status-prototype%20%2F%20design-orange)
+![Region](https://img.shields.io/badge/launch-Tamil%20Nadu-blue)
+![Languages](https://img.shields.io/badge/languages-Tamil%20%7C%20English-green)
+![Mobile](https://img.shields.io/badge/mobile-Flutter-02569B)
+![Backend](https://img.shields.io/badge/backend-FastAPI%20%2B%20PostgreSQL-009688)
+
+</div>
+
+> **Status:** 🧪 Prototype / design phase. This README is the product and technical blueprint for the prototype. Code lands module by module, following the [game plan](#9-game-plan).
 > **Working name:** "AcadStart" is a placeholder.
 
 ---
 
 ## Table of contents
 1. [Why this exists](#1-why-this-exists)
-2. [Who it's for](#2-who-its-for)
-3. [Prototype feature set](#3-prototype-feature-set)
-4. [System architecture](#4-system-architecture)
-5. [How each feature works and performs](#5-how-each-feature-works-and-performs)
-6. [Privacy, security & compliance by design](#6-privacy-security--compliance-by-design)
-7. [Game plan](#7-game-plan)
-8. [Scale-up features (open-ended)](#8-scale-up-features-open-ended)
-9. [Tech stack](#9-tech-stack)
-10. [Planned repository layout](#10-planned-repository-layout)
-11. [Non-functional targets](#11-non-functional-targets)
-12. [Glossary](#12-glossary)
-13. [Contributing & license](#13-contributing--license)
+2. [What makes AcadStart different](#2-what-makes-acadstart-different)
+3. [Who it's for](#3-who-its-for)
+4. [Feature map](#4-feature-map)
+5. [Prototype feature set](#5-prototype-feature-set)
+6. [System architecture](#6-system-architecture)
+7. [How each feature works and performs](#7-how-each-feature-works-and-performs)
+8. [Privacy, security & compliance by design](#8-privacy-security--compliance-by-design)
+9. [Game plan](#9-game-plan)
+10. [Scale-up features (open-ended)](#10-scale-up-features-open-ended)
+11. [Tech stack](#11-tech-stack)
+12. [Planned repository layout](#12-planned-repository-layout)
+13. [Non-functional targets](#13-non-functional-targets)
+14. [Glossary](#14-glossary)
+15. [Contributing & license](#15-contributing--license)
 
 ---
 
 ## 1. Why this exists
-Most private schools in India still run on paper registers, Excel sheets and dozens of WhatsApp groups. Parents chase fee receipts and wonder where the bus is. Teachers re-enter the same data into multiple government and school systems. Management has no single view of the school.
+Most private schools in India still run on paper registers, the paper school diary, Excel sheets and dozens of one-way WhatsApp groups. Parents chase fee receipts and wonder where the bus is. At dismissal, children are often handed over on verbal trust. Teachers re-enter the same data into several school and government systems. Management has no single view of the school.
 
 AcadStart aims to be **the one app a school actually needs**:
-- **Wedge first:** fees, attendance, homework and parent communication, the things a school uses every single day.
-- **Then the differentiators:** live bus tracking from the GPS devices buses already carry, a Tamil/English AI assistant on WhatsApp, and **parent-controlled, verifiable student records** that move with the child.
-- **Compliance built in:** approved-fee-only billing, public fee disclosure, state-system (EMIS / UDISE+) friendly exports, and child-data protection under India's DPDP Act.
+- **Wedge first:** fees, attendance, homework, the school diary and parent communication, the things a school uses every single day.
+- **Signature features nobody else combines:** a door-to-door **Custody Chain**, a **voice-first Tamil assistant** with two-way translated messaging, and **Snap-to-Digitise** onboarding.
+- **Compliance built in:** approved-fee-only billing, public fee disclosure, EMIS/UDISE+-friendly exports, and child-data protection under India's DPDP Act.
 
-## 2. Who it's for
+## 2. What makes AcadStart different
+
+| | Typical school app in India | **AcadStart** |
+|---|---|---|
+| **Child safety** | Bus GPS dot on a map (if any) | 🛡️ **Custody Chain**: every handover verified and logged, *home → bus → gate → class → gate/bus → home*, with alerts only when something's wrong |
+| **Dismissal** | Verbal trust at the gate | 🔑 **Safe Handover**: pre-approved adults with photo + rotating QR, one-time pickup passes, instant parent confirmation |
+| **Parent communication** | English text broadcasts in WhatsApp groups | 🗣️ **Voice-first, two-way translated**: parents ask and reply by Tamil voice note, teachers read and write in English |
+| **Getting started** | Weeks of manual data entry | 📸 **Snap-to-Digitise**: photograph paper registers and marks sheets, confirm, done |
+| **School diary & slips** | Paper diary, signed slips lost in bags | ✍️ **Digital diary and permission slips** with one-tap sign-off and a live "who hasn't signed" board |
+| **Records** | Locked in the vendor's system | 📜 **Parent-held, signed, QR-verifiable records**, shared only with consent, with full data export |
+
+Inspiration from abroad, adapted for India: dismissal management (PikMyKid, US), government parent consent apps (Parents Gateway, Singapore), translated family messaging (TalkingPoints, US), and verifiable credentials (Europass, EU). The **Custody Chain** combination (transport + gate + attendance in a single handover timeline) is AcadStart's own.
+
+## 3. Who it's for
 | Role | What they get |
 |---|---|
-| 🏫 **Management / Admin** | Dashboard of the whole institution: enrolment, attendance, fee collection, transport, events. Configure classes, fee structures, routes and staff. |
-| 👩‍🏫 **Teacher** | Class and timetable overview, one-tap attendance (works offline), homework and assignments, remarks to parents, exam prep. |
-| 👨‍👩‍👧 **Parent / Guardian** | Child's day at a glance: attendance, homework, circulars, fee dues and online payment, live bus location and ETA, cafeteria menu, records wallet. Tamil or English. |
+| 🏫 **Management / Admin** | Live dashboard: attendance, fee collection, buses on the road, custody exceptions, unsigned slips, parent tickets. Configures classes, fee structures, routes, staff and gates. |
+| 👩‍🏫 **Teacher** | Class and timetable overview, one-tap offline attendance, Snap-to-Digitise for paper registers, homework, diary notes, translated two-way messages with parents. |
+| 👨‍👩‍👧 **Parent / Guardian** | The child's day as one timeline (custody, attendance, homework, diary), fee dues and online payment, live bus and ETA, permission slips, authorised pickups, records wallet. Tamil or English, text or voice. |
 | 🎒 **Student** | Timetable, assignments and due dates, announcements, certificates. |
-| 🚌 **Driver / Transport staff** | Trip start/stop, route view, pickup/drop confirmation (fallback tracking when the bus has no GPS device). |
+| 🚌 **Driver / Bus attendant** | Trip start/stop, boarding and drop confirmation per child (feeds the Custody Chain), route view, GPS fallback when the bus has no device. |
+| 🛂 **Gate staff** | Gate mode: scan arrivals, verify pickups against approved adults with photo, log every handover. |
 
 All roles live in **one mobile app with role-based views**, plus a **web admin panel** for school offices.
 
-## 3. Prototype feature set
-The prototype is deliberately narrow: enough to run a real school day end to end, nothing more.
+## 4. Feature map
+```mermaid
+mindmap
+  root((AcadStart))
+    Signature
+      Custody Chain
+      Safe Handover at the gate
+      Voice-first Tamil assistant
+      Two-way translated messaging
+      Snap-to-Digitise
+    Daily core
+      Offline attendance
+      Homework and assignments
+      Digital diary
+      Permission slips
+      Circulars and calendar
+      Timetable and cafeteria menu
+    Money
+      Approved-heads fee billing
+      UPI and card payments
+      Digital receipts
+      Public fee disclosure
+    Transport
+      Live bus map and ETA
+      AIS-140 device integration
+      Driver app fallback
+      Route simulator
+    Records
+      Unique IDs
+      Signed QR certificates
+      Parent-approved sharing
+```
+
+## 5. Prototype feature set
+The prototype is deliberately focused: enough to run a real school day end to end, plus the three signature features.
 
 | # | Module | Prototype scope | Roles |
 |---|---|---|---|
-| M1 | **Foundation** | Multi-school tenancy, phone-OTP login, roles, school setup wizard, Excel/CSV import of students, guardians and staff, unique IDs | All |
-| M2 | **Daily core** | Attendance (daily + period-wise, offline-capable), absence alerts, homework/assignments, circulars/announcements, events calendar, timetable viewer, cafeteria menu | Teacher, Parent, Student, Admin |
-| M3 | **Fees** | Fee structures locked to **approved fee heads**, invoices, instalments and concessions, online payment (UPI/cards via a payment gateway, test mode), receipts, dues reminders, **public fee-disclosure page** | Admin, Parent |
-| M4 | **Bus tracking** | Routes and stops, live bus map for parents, ETA, "bus is 2 stops away" and "child dropped" alerts. Ingest from existing **AIS-140 GPS devices**, or from the **driver app** as fallback, plus a **route simulator** for demos | Parent, Admin, Driver |
-| M5 | **Messaging + AI assistant** | WhatsApp + push notifications; AI assistant answering parent questions in **Tamil or English** ("Is there homework today?", "What fees are due?", "Where's the bus?") from the school's own data | Parent, Admin |
-| M6 | **Identity & records** | Unique IDs for institutions, teachers and students (with optional links to national/state IDs), **digitally signed, QR-verifiable certificates** (event participation, achievements, supporting transfer records), parent-approved sharing to another school or event organiser | Parent, Admin, Teacher |
-| M0 | **Clickable demo** | No-backend interactive walkthrough of all of the above for school demos | — |
+| M0 | **Clickable demo** | No-backend interactive walkthrough of every role, leading with the Custody Chain and voice assistant | — |
+| M1 | **Foundation + Snap-to-Digitise** ⭐ | Multi-school tenancy, phone-OTP login, roles, setup wizard, unique IDs, Excel/CSV import, and **photo-to-data import of paper registers and marks sheets** | Admin, Teacher |
+| M2 | **Daily core + Digital diary** | Offline-first attendance and absence alerts, homework, circulars, events calendar, timetable, cafeteria menu, **digital diary notes and permission slips with one-tap sign-off** | Teacher, Parent, Student, Admin |
+| M3 | **Fees** | Fee structures locked to **approved fee heads**, invoices, instalments and concessions, UPI/card payments (gateway test mode), receipts, reminders, **public fee-disclosure page** | Admin, Parent |
+| M4 | **Transport + Safe Handover + Custody Chain** ⭐ | Routes and stops, live bus map and ETA, AIS-140 device ingest + driver-app fallback + route simulator, boarding/drop confirmation, **gate mode with authorised-pickup verification**, and the **child's custody timeline with exception alerts** | Parent, Driver, Gate staff, Admin |
+| M5 | **Voice-first assistant + translated messaging** ⭐ | WhatsApp + push; AI assistant answering in **Tamil or English, by text or voice note**; **two-way translated teacher ↔ parent messaging** with the original always available | Parent, Teacher, Admin |
+| M6 | **Identity & records** | Unique IDs with optional national/state ID links, **digitally signed QR-verifiable certificates** (events, achievements, supporting transfer records), parent-approved sharing | Parent, Admin, Teacher |
 
-**Out of scope for the prototype** (see [Scale-up](#8-scale-up-features-open-ended)): exams and report cards, the supplies marketplace, admissions CRM, HR/payroll, library/inventory/hostel, and government integrations beyond file export.
+⭐ = signature feature
 
-## 4. System architecture
+**Out of scope for the prototype** (see [Scale-up](#10-scale-up-features-open-ended)): exams and report cards, fee AutoPay, supplies marketplace, admissions CRM, HR/payroll, library/inventory/hostel, and government integrations beyond file export.
 
-### 4.1 High-level view
+## 6. System architecture
+
+### 6.1 High-level view
 ```mermaid
-flowchart LR
-  subgraph Clients
-    MA["📱 Mobile app (Flutter)<br/>Parent · Teacher · Student · Driver"]
-    WA["🖥️ Web admin (Next.js)<br/>School office · Management"]
-    WAPP["💬 WhatsApp<br/>(parents)"]
-    PUB["🌐 Public pages<br/>Fee disclosure · Certificate verify"]
+flowchart TB
+  subgraph CL["Clients"]
+    direction TB
+    MA(["📱 Mobile app<br/>Parent · Teacher · Student<br/>Driver · Gate staff"])
+    WA(["🖥️ Web admin<br/>School office · Management"])
+    PUB(["🌐 Public pages<br/>Fee disclosure · Verify certificate"])
+    WAPP(["💬 WhatsApp<br/>text + voice notes"])
   end
 
-  subgraph Edge
-    GW["API gateway<br/>Auth (JWT) · Rate limits · Tenant routing"]
-    WS["Realtime gateway<br/>WebSocket fan-out"]
-    ING["Telematics ingest<br/>MQTT / TCP / HTTP"]
+  subgraph ED["Edge"]
+    direction TB
+    GW["🔐 API gateway<br/>Auth · Rate limits · Tenant routing"]
+    WS["⚡ Realtime gateway<br/>WebSocket fan-out"]
+    ING["📡 Telematics ingest<br/>MQTT · TCP · HTTP"]
+    WH["🔔 Webhook receiver<br/>WhatsApp · Payments"]
   end
 
-  subgraph Core["Core services (modular monolith)"]
-    ID["Identity & Tenancy<br/>schools · users · roles · IDs"]
-    ACA["Academics<br/>classes · attendance · homework · timetable"]
-    COM["Communication<br/>circulars · notifications"]
-    FEE["Fees & Payments<br/>approved heads · invoices · receipts"]
-    TRN["Transport<br/>routes · trips · ETA · geofences"]
-    REC["Records & Credentials<br/>signing · consent · sharing"]
-    AI["AI Assistant<br/>intent · tool-calling · guardrails"]
+  subgraph CORE["Core services · modular monolith"]
+    direction TB
+    ID["🪪 Identity + Tenancy"]
+    ACA["📚 Academics<br/>attendance · homework · timetable"]
+    COM["📣 Communication<br/>diary · slips · notifications"]
+    FEE["💳 Fees + Payments"]
+    TRN["🚌 Transport<br/>routes · trips · ETA"]
+    CUS["🛡️ Custody Chain<br/>handovers · exceptions"]
+    REC["📜 Records + Credentials"]
   end
 
-  subgraph Data
-    PG[("PostgreSQL<br/>tenant-scoped (RLS)")]
-    RD[("Redis<br/>live positions · pub/sub · queues")]
-    OBJ[("Object storage<br/>PDFs · imports · media")]
-    AUD[("Audit log<br/>append-only")]
+  subgraph AIL["AI layer"]
+    direction TB
+    AST["🤖 Assistant<br/>tool-calling · guardrails"]
+    SPE["🗣️ Speech + Translation<br/>Tamil ⇄ English"]
+    DIG["📸 Snap-to-Digitise<br/>vision extraction"]
   end
 
-  subgraph External["External services"]
-    PGW["Payment gateway<br/>UPI · cards · netbanking"]
-    WBA["WhatsApp Business API"]
-    FCM["Push (FCM/APNs) · SMS (DLT)"]
-    LLM["LLM API"]
-    MAP["Maps / routing<br/>OSM · OSRM"]
-    GPS["🚌 AIS-140 GPS devices"]
-    GOV["State/national systems<br/>EMIS · UDISE+ (file export)"]
+  subgraph DATA["Data"]
+    direction TB
+    PG[("🐘 PostgreSQL<br/>row-level security")]
+    RD[("⚡ Redis<br/>live state · pub/sub · queues")]
+    OBJ[("🗂️ Object storage")]
+    AUD[("🧾 Audit log")]
   end
 
-  MA --> GW
-  WA --> GW
-  PUB --> GW
-  WAPP <--> WBA <--> COM
-  WS -. "live updates" .-> MA
-  GPS --> ING --> TRN
-  MA -- "driver mode GPS" --> ING
-  GW --> ID & ACA & COM & FEE & TRN & REC
-  COM --> AI --> LLM
-  AI -- "scoped tools" --> ACA & FEE & TRN
-  FEE <--> PGW
-  COM --> FCM
-  TRN --> MAP
-  TRN --> RD --> WS
-  ID & ACA & COM & FEE & TRN & REC --> PG
-  FEE & REC --> OBJ
-  ID & FEE & REC --> AUD
-  ACA -. "export" .-> GOV
+  subgraph EXT["External services"]
+    direction TB
+    PGW{{"💳 Payment gateway · UPI"}}
+    WBA{{"💬 WhatsApp Business API"}}
+    PUSH{{"🔔 Push · SMS"}}
+    LLM{{"🧠 LLM · STT · TTS · Vision"}}
+    MAP{{"🗺️ OSM · OSRM"}}
+    GPS{{"🚌 AIS-140 devices"}}
+    GOV{{"🏛️ EMIS · UDISE+ export"}}
+  end
+
+  CL ==>|"HTTPS · WebSocket · WhatsApp"| ED
+  EXT -.->|"GPS pings · webhooks"| ED
+  ED ==> CORE
+  CORE <==>|"scoped tools"| AIL
+  CORE ==> DATA
+  CORE -.->|"payments · push · maps · export"| EXT
+  AIL -.->|"model calls"| EXT
+
+  classDef client fill:#E0E7FF,stroke:#4F46E5,stroke-width:1.5px,color:#1E1B4B
+  classDef edg fill:#CFFAFE,stroke:#0891B2,stroke-width:1.5px,color:#083344
+  classDef core fill:#DCFCE7,stroke:#16A34A,stroke-width:1.5px,color:#052E16
+  classDef ai fill:#FCE7F3,stroke:#DB2777,stroke-width:1.5px,color:#500724
+  classDef data fill:#FEF3C7,stroke:#D97706,stroke-width:1.5px,color:#451A03
+  classDef ext fill:#F1F5F9,stroke:#64748B,stroke-width:1.5px,color:#0F172A
+  classDef sig fill:#FDE047,stroke:#A16207,stroke-width:3px,color:#422006
+
+  class MA,WA,PUB,WAPP client
+  class GW,WS,ING,WH edg
+  class ID,ACA,COM,FEE,TRN,REC core
+  class AST ai
+  class PG,RD,OBJ,AUD data
+  class PGW,WBA,PUSH,LLM,MAP,GPS,GOV ext
+  class CUS,SPE,DIG sig
+
+  style CL fill:#6366F10F,stroke:#6366F1,stroke-dasharray:5 5
+  style ED fill:#0891B20F,stroke:#0891B2,stroke-dasharray:5 5
+  style CORE fill:#16A34A0F,stroke:#16A34A,stroke-dasharray:5 5
+  style AIL fill:#DB27770F,stroke:#DB2777,stroke-dasharray:5 5
+  style DATA fill:#D977060F,stroke:#D97706,stroke-dasharray:5 5
+  style EXT fill:#64748B0F,stroke:#64748B,stroke-dasharray:5 5
 ```
+<sub>🟨 Yellow nodes = signature features. Solid arrows = request/data flow, dotted = realtime push or export.</sub>
 
 **Design choices**
-- **Modular monolith first:** one deployable backend with strict module boundaries. That's cheap to run and easy to change, and each module can be split into its own service later (transport and messaging are the first candidates).
-- **Tenant isolation:** every row carries `institution_id`. PostgreSQL **row-level security** enforces it, so a bug in application code can't leak one school's data to another.
-- **Realtime is separate from request/response:** live bus positions flow through Redis pub/sub to a WebSocket gateway and never touch the main database on the hot path.
-- **Integrations sit behind adapters:** payment gateway, WhatsApp provider, LLM, maps and GPS vendors are swappable.
+- **Modular monolith first:** one deployable backend with strict module boundaries. It's cheap to run and easy to change, and modules can later be split into services (transport, custody and messaging are the first candidates).
+- **Tenant isolation in the database:** every row carries `institution_id`, enforced by PostgreSQL **row-level security**.
+- **Realtime off the hot path:** bus positions and custody events flow through Redis pub/sub to the WebSocket gateway, not through the main database.
+- **AI behind narrow interfaces:** the assistant can only call scoped tools, and speech, translation and vision are swappable adapters (cloud APIs or self-hosted Indic models).
+- **Every integration is an adapter:** payment gateway, WhatsApp provider, LLM/speech/vision vendors, maps and GPS device vendors can all be replaced.
 
-### 4.2 Core data model (prototype)
+### 6.2 Data model: academics, fees and onboarding
 ```mermaid
 erDiagram
-  INSTITUTION ||--o{ CAMPUS : has
   INSTITUTION ||--o{ ACADEMIC_YEAR : runs
   INSTITUTION ||--o{ STAFF : employs
+  INSTITUTION ||--o{ FEE_STRUCTURE : "approved (versioned)"
   ACADEMIC_YEAR ||--o{ SECTION : contains
   SECTION ||--o{ ENROLMENT : has
   STUDENT ||--o{ ENROLMENT : "enrolled via"
@@ -143,49 +232,88 @@ erDiagram
   STAFF ||--o{ SECTION : "class teacher of"
   SECTION ||--o{ ATTENDANCE : records
   SECTION ||--o{ HOMEWORK : assigned
-  INSTITUTION ||--o{ FEE_STRUCTURE : "approved (versioned)"
   FEE_STRUCTURE ||--o{ FEE_HEAD : lists
   ENROLMENT ||--o{ INVOICE : billed
   INVOICE ||--o{ PAYMENT : "settled by"
-  INSTITUTION ||--o{ ROUTE : operates
-  ROUTE ||--o{ STOP : has
-  VEHICLE ||--o{ TRIP : runs
-  ROUTE ||--o{ TRIP : "scheduled as"
-  STUDENT }o--o| STOP : "boards at"
-  STUDENT ||--o{ CREDENTIAL : "holds (wallet)"
-  INSTITUTION ||--o{ CREDENTIAL : issues
-  GUARDIAN ||--o{ CONSENT_GRANT : gives
+  STAFF ||--o{ DIGITISE_JOB : uploads
 
   INSTITUTION {
     uuid id
     string acad_id "AS-INST-xxxx"
     string udise_code "optional"
     string board "State / CBSE / ICSE"
-    string signing_key_ref
   }
   STUDENT {
     uuid id
     string acad_id "AS-STU-xxxx"
     string emis_id "optional, state"
     string apaar_id "optional, consented"
-    date dob
-  }
-  STAFF {
-    uuid id
-    string acad_id "AS-TCH-xxxx"
-    string udise_staff_code "optional"
   }
   FEE_STRUCTURE {
     uuid id
-    string approval_ref "fee committee order no."
+    string approval_ref "fee committee order"
     date valid_from
     date valid_to
     bool locked
   }
+  DIGITISE_JOB {
+    uuid id
+    string kind "attendance / marks / admissions"
+    string image_ref "auto-deleted"
+    float avg_confidence
+    string status "review / committed"
+  }
+```
+
+### 6.3 Data model: safety, communication and records
+```mermaid
+erDiagram
+  STUDENT ||--o{ HANDOVER_EVENT : "custody timeline"
+  TRIP ||--o{ HANDOVER_EVENT : "bus events"
+  GUARDIAN ||--o{ AUTHORISED_PICKUP : registers
+  AUTHORISED_PICKUP }o--|| STUDENT : "may collect"
+  ROUTE ||--o{ STOP : has
+  ROUTE ||--o{ TRIP : "scheduled as"
+  VEHICLE ||--o{ TRIP : runs
+  STUDENT }o--o| STOP : "boards at"
+  NOTICE ||--o{ ACKNOWLEDGEMENT : collects
+  GUARDIAN ||--o{ ACKNOWLEDGEMENT : signs
+  GUARDIAN ||--o{ MESSAGE : "sends / receives"
+  STUDENT ||--o{ CREDENTIAL : "holds (wallet)"
+  GUARDIAN ||--o{ CONSENT_GRANT : gives
+
+  HANDOVER_EVENT {
+    uuid id
+    string type "board / alight / gate-in / present / release"
+    string from_custodian
+    string to_custodian
+    string method "device / QR / driver tap / teacher"
+    datetime at
+  }
+  AUTHORISED_PICKUP {
+    uuid id
+    string name
+    string relation
+    string photo_ref "encrypted"
+    bool one_time
+    datetime valid_until
+  }
+  NOTICE {
+    uuid id
+    string type "diary / circular / permission slip"
+    bool needs_signature
+    datetime deadline
+  }
+  MESSAGE {
+    uuid id
+    string original_lang "ta / en"
+    string original_text
+    string translated_text
+    string audio_ref "deleted after transcription"
+  }
   CREDENTIAL {
     uuid id
     string type "transfer-record / event / achievement"
-    json payload
     string signature "Ed25519"
     string status "active / revoked"
   }
@@ -197,308 +325,479 @@ erDiagram
   }
 ```
 
-## 5. How each feature works and performs
+## 7. How each feature works and performs
 
-### 5.1 Foundation: onboarding a school in one day
-- **Setup wizard:** school profile → academic year → classes/sections → staff → students/guardians.
-- **Excel/CSV import** with column auto-mapping, validation and a preview of errors (duplicate admission numbers, invalid phone numbers) before commit. Paper registers can later be digitised via OCR (scale-up).
-- **Login:** phone number + OTP (parents rarely use email). One guardian phone can be linked to several children across classes, or even across schools.
-- **IDs:** every institution, staff member and student gets a permanent internal ID (`AS-INST-…`, `AS-TCH-…`, `AS-STU-…`). National and state identifiers (UDISE+ code, EMIS ID, APAAR ID) are stored as **optional, linked fields** and never used as primary keys. Aadhaar is never required.
-- **Target:** a 1,000-student school imported and live within **one working day**.
+### 7.1 Foundation + Snap-to-Digitise ⭐
+**Onboarding a school in one day.** The setup wizard runs school profile → academic year → classes and sections → staff → students and guardians. Excel/CSV import auto-maps columns and previews errors before commit.
 
-### 5.2 Attendance: offline-first
-```mermaid
-sequenceDiagram
-  autonumber
-  participant T as Teacher app
-  participant L as Local DB (on device)
-  participant API as Backend
-  participant N as Notification service
-  participant P as Parent
-  T->>L: Mark attendance (works with no network)
-  L-->>T: Saved locally ✓
-  Note over L,API: Sync queue retries when online
-  L->>API: Push batch (idempotent, versioned)
-  API->>API: Resolve conflicts (last-writer + audit trail)
-  API->>N: Absent students list
-  N->>P: Push / WhatsApp: "Arjun is marked absent today"
-```
-- Marking a class of 40 students takes **under 30 seconds** (everyone is present by default; tap only the absentees).
-- Absence alerts reach parents **within 5 minutes** of sync.
-- Period-wise attendance, late arrivals and leave requests all build on the same model.
-
-### 5.3 Fees and payments: approved heads only
-```mermaid
-sequenceDiagram
-  autonumber
-  participant A as Admin
-  participant F as Fee service
-  participant P as Parent app
-  participant G as Payment gateway
-  A->>F: Create fee structure + approval reference
-  F->>F: Lock structure (only approved heads billable)
-  F->>P: Invoice / dues notification
-  P->>G: Pay via UPI / card (gateway checkout)
-  G-->>F: Signed webhook (payment captured)
-  F->>F: Verify signature, idempotent update, allocate to heads
-  F->>P: Digital receipt (PDF + in-app)
-  F->>A: Collection dashboard updated
-```
-- **Approved-heads lock:** an invoice can only contain fee heads from the active, approved fee structure, which carries the fee-committee approval reference. Extra charges can't be added ad hoc. This mirrors Tamil Nadu's private school fee regulation and protects the school in audits.
-- **No hidden parent charges:** the platform doesn't add app or convenience fees to parents' bills. Payment costs are configured as school-borne.
-- **Public fee-disclosure page:** a per-school public page showing the approved structure, generated automatically from the locked data.
-- **Money never touches AcadStart:** funds settle from the gateway directly into the school's bank account. AcadStart holds no money, so it needs no payment-aggregator licence.
-- **Reliability:** webhook handling is idempotent and signature-verified, and a nightly reconciliation job catches any missed events. **Target:** receipt in the parent's hands within **10 seconds** of payment.
-
-### 5.4 Live bus tracking: built for the 7:30 am rush
+**Snap-to-Digitise** turns paper into data without retyping:
 ```mermaid
 flowchart LR
-  subgraph Sources
-    D1["AIS-140 device<br/>(already on most buses)"]
-    D2["Driver app<br/>(fallback)"]
-    SIM["Route simulator<br/>(demo / testing)"]
+  A(["📸 Teacher photographs<br/>register or marks sheet"]) --> B["Quality check<br/>blur · glare · crop"]
+  B -->|retake| A
+  B --> C["Vision model<br/>table → structured rows"]
+  C --> D["Roster matching<br/>names ↔ class list"]
+  D --> E{"Confidence<br/>per cell"}
+  E -->|high| F["Auto-filled"]
+  E -->|low| G["Highlighted<br/>for review"]
+  F & G --> H(["✅ Teacher confirms"])
+  H --> I[("Committed<br/>+ audit log")]
+  H -.-> J["🗑️ Image deleted after<br/>retention window"]
+
+  classDef step fill:#E0E7FF,stroke:#4F46E5,color:#1E1B4B
+  classDef ai fill:#FCE7F3,stroke:#DB2777,color:#500724
+  classDef ok fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef warn fill:#FEF3C7,stroke:#D97706,color:#451A03
+  class A,B,J step
+  class C,D,E ai
+  class F,H,I ok
+  class G warn
+```
+- **Roster-aware:** extracted names are matched against the class list, so handwriting errors snap to real students.
+- **Human in the loop:** nothing is committed without the teacher's confirmation, and low-confidence cells are highlighted.
+- **Works for:** daily attendance registers, marks registers, old admission registers (bulk back-filling).
+- **Logins and IDs:** phone + OTP for everyone. Permanent internal IDs (`AS-INST-…`, `AS-TCH-…`, `AS-STU-…`). UDISE+ code, EMIS ID and APAAR ID are optional linked fields, never primary keys. Aadhaar is never required.
+- **Targets:** a 1,000-student school live within **one working day**; a 40-row register page digitised and confirmed in **under 2 minutes**; **≥ 95%** of cells correct before review.
+
+### 7.2 Attendance: offline-first
+```mermaid
+sequenceDiagram
+  autonumber
+  participant T as 👩‍🏫 Teacher app
+  participant L as 📦 On-device DB
+  participant API as ⚙️ Backend
+  participant N as 🔔 Notifications
+  actor P as 👨‍👩‍👧 Parent
+  rect rgba(79, 70, 229, 0.08)
+  Note over T,L: Works with no network
+  T->>L: Mark absentees (everyone present by default)
+  L-->>T: Saved locally ✓
   end
-  D1 & D2 & SIM -->|"ping every 5–10 s"| ING["Ingest<br/>normalise · validate · de-jitter"]
-  ING --> POS[("Redis<br/>latest position per bus")]
-  ING --> ETA["ETA engine<br/>route polyline + historical segment times"]
-  ETA --> GEO["Geofence rules<br/>'2 stops away' · 'reached school' · 'off-route'"]
-  GEO --> NOTIF["Push / WhatsApp alerts"]
-  POS --> PUBSUB["Pub/Sub per trip"]
-  PUBSUB --> WSG["WebSocket gateway"]
-  WSG --> PAR["Parent map<br/>(only their child's bus)"]
-  ING -. "batched, downsampled" .-> HIST[("Trip history<br/>PostgreSQL")]
+  rect rgba(22, 163, 74, 0.08)
+  Note over L,API: Sync when online
+  L->>API: Push batch (idempotent, versioned)
+  API->>API: Resolve conflicts + audit trail
+  API->>N: Absent list + custody check
+  N->>P: "Arjun is marked absent today"
+  end
 ```
-- **Hardware first, phone as backup.** Many school buses are already required to carry AIS-140 tracking devices, so AcadStart integrates those feeds instead of selling hardware. The driver app covers buses without devices, but phone GPS is less reliable (battery savers, mobile data being switched off), so it's the fallback.
-- **Privacy by scope.** A parent can only subscribe to the live trip their own child is on, only while that trip is running.
-- **Peak-load math:** 50 schools × 30 buses = 1,500 buses pinging every 5 s is ~300 messages/s, which a single small instance can handle. The real peak is *parents*: ~50,000 concurrent viewers at 7:30 am. Positions are fanned out via Redis pub/sub to horizontally scalable WebSocket nodes, and if WebSockets fail the client falls back to polling a cached endpoint every 15 s.
-- **Targets:** position on the parent's screen **≤ 10 s** behind reality; ETA error **≤ 3 min** on familiar routes; "bus approaching" alert **≥ 5 min** before arrival.
+- A class of 40 is marked in **under 30 seconds**. Absence alerts arrive **within 5 minutes** of sync.
+- Attendance is also a Custody Chain checkpoint (see 7.5). "Arrived at gate but not marked present" raises an exception.
 
-### 5.5 Messaging and the Tamil/English AI assistant
+### 7.3 Digital diary and permission slips
 ```mermaid
 sequenceDiagram
   autonumber
-  participant P as Parent (WhatsApp)
-  participant W as WhatsApp webhook
-  participant AI as Assistant service
-  participant LLM as LLM API
-  participant T as Scoped tools
-  P->>W: "இன்னைக்கு homework என்ன?" (What's today's homework?)
-  W->>AI: Message + verified guardian phone
-  AI->>AI: Resolve guardian → linked children only
-  AI->>LLM: Prompt + allowed tools (no raw data)
-  LLM->>T: get_homework(child_id, today)
-  T-->>LLM: 2 items (Maths p.42, Tamil essay)
-  LLM-->>AI: Answer in Tamil
-  AI->>P: Reply + link to app
-  Note over AI: Out-of-scope or sensitive → hand off to school office
+  participant AD as 🏫 School office
+  participant CO as 📣 Communication
+  actor PA as 👨‍👩‍👧 Parent
+  rect rgba(8, 145, 178, 0.08)
+  AD->>CO: New slip · "Zoo trip on 21 Nov · sign by 15 Nov"
+  CO->>PA: App + WhatsApp notification in Tamil or English
+  PA->>CO: Tap "I consent" + OTP
+  CO-->>AD: Live board · 312 signed · 41 pending
+  CO->>PA: Auto-reminder to pending parents 24 h before deadline
+  end
 ```
-- **Tool-calling, not open data access.** The model can only call narrow, read-mostly tools (`get_homework`, `get_attendance`, `get_fee_dues`, `get_bus_eta`, `get_circulars`, `get_menu`), and only for children linked to the verified phone number.
-- **Language:** replies in the parent's language (Tamil, English, or code-mixed "Tanglish").
-- **Cost control:** a small, fast model handles routine questions, with a larger model only for complex ones. Answers are cached for common questions (e.g., today's menu), and each school has a per-school message quota.
-- **Guardrails:** no medical, legal or disciplinary judgements; complaints are logged as tickets for staff; full audit log of questions and tool calls; no use of children's data for model training.
-- **Targets:** reply in **≤ 5 s**. Most routine office queries (homework, dues, bus) resolved without staff involvement.
+- Replaces the paper diary: teacher notes, circular acknowledgements and event consent, each with a timestamped, verifiable sign-off.
+- Any optional payment linked to a slip is handled only where the school's approved fee rules permit it, and is kept separate from tuition fees.
+- **Target:** acknowledgement status visible to the school in **real time**.
 
-### 5.6 Identity and verifiable records: records that move with the child, with parent consent
+### 7.4 Fees and payments: approved heads only
 ```mermaid
 sequenceDiagram
   autonumber
-  participant S1 as Current school
-  participant R as Records service
-  participant G as Guardian
-  participant S2 as New school / event organiser
-  S1->>R: Issue credential (event certificate, supporting transfer record)
-  R->>R: Sign with school key (Ed25519), add QR + verify URL
-  R->>G: Credential appears in parent's wallet
-  S2->>G: Request records (admission / event registration)
-  G->>R: Approve share (OTP) · choose items · set expiry
+  participant A as 🏫 Admin
+  participant F as 💳 Fee service
+  actor P as 👨‍👩‍👧 Parent
+  participant G as 🏦 Payment gateway
+  rect rgba(217, 119, 6, 0.08)
+  Note over A,F: Setup
+  A->>F: Fee structure + approval reference
+  F->>F: Lock · only approved heads billable
+  end
+  rect rgba(22, 163, 74, 0.08)
+  Note over F,G: Collect
+  F->>P: Invoice + dues reminder
+  P->>G: Pay by UPI or card
+  G-->>F: Signed webhook · payment captured
+  F->>F: Verify, idempotent update, allocate to heads
+  F->>P: Digital receipt
+  F->>A: Collection dashboard updated
+  end
+```
+- **Approved-heads lock:** invoices may only contain heads from the active approved structure, matching Tamil Nadu's private-school fee regulation.
+- **No hidden parent charges:** no app or convenience fee is added for parents.
+- **Public fee-disclosure page**, generated from the locked structure.
+- **Money never touches AcadStart:** the gateway settles directly to the school's bank account. A nightly reconciliation job catches missed webhooks.
+- **Target:** receipt **≤ 10 s** after payment.
+
+### 7.5 Transport, Safe Handover and the Custody Chain ⭐
+**The Custody Chain** treats the child's day as a series of verified handovers between custodians. Normal handovers are logged quietly; parents and the school are alerted only on exceptions.
+
+```mermaid
+stateDiagram-v2
+  direction LR
+  state "🏠 With family" as Home
+  state "🚌 On morning bus" as BusIn
+  state "🚪 Entered school gate" as Gate
+  state "📚 Present in class" as InClass
+  state "🚌 On return bus" as BusOut
+  state "🤝 Handed to authorised adult" as Released
+  state "⚠️ Exception" as Exception
+
+  [*] --> Home
+  Home --> BusIn : boarded · device or driver tap
+  Home --> Gate : dropped by parent · gate scan
+  BusIn --> Gate : bus arrived · gate scan
+  Gate --> InClass : marked present
+  InClass --> BusOut : boarded return bus
+  InClass --> Released : released at gate · QR verified
+  BusOut --> Released : dropped at stop · guardian confirmed
+  Released --> [*]
+
+  BusIn --> Exception : no gate scan in 20 min
+  Gate --> Exception : not present by first period
+  InClass --> Exception : pickup by unlisted adult
+  BusOut --> Exception : missed stop or off-route
+
+  classDef ok fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef move fill:#CFFAFE,stroke:#0891B2,color:#083344
+  classDef alert fill:#FEE2E2,stroke:#DC2626,stroke-width:2px,color:#7F1D1D
+  class Home,InClass,Released ok
+  class BusIn,Gate,BusOut move
+  class Exception alert
+```
+
+**What the parent sees** (one timeline, in Tamil or English):
+
+| Time | Event | Verified by |
+|---|---|---|
+| 07:42 | Boarded Bus 3 at Gandhi Nagar stop | Bus attendant tap + GPS |
+| 08:15 | Entered school, Gate 1 | Gate scan |
+| 08:30 | Present in Class 5B | Teacher attendance |
+| 15:40 | Handed to *Amma* at Gate 2 | Rotating QR + photo check |
+
+**Safe Handover at the gate:**
+```mermaid
+sequenceDiagram
+  autonumber
+  actor PA as 👨‍👩‍👧 Parent
+  participant APP as 📱 Parent app
+  participant CU as 🛡️ Custody service
+  participant GA as 🛂 Gate staff app
+  actor AD as 🧑 Adult collecting
+  rect rgba(22, 163, 74, 0.08)
+  Note over PA,CU: Before dismissal
+  PA->>APP: Register authorised adults · photo + relation
+  PA->>APP: Or issue a one-time pass for today
+  APP->>CU: Store pass · time window
+  end
+  rect rgba(8, 145, 178, 0.08)
+  Note over GA,AD: At the gate
+  AD->>GA: Shows rotating QR or pass
+  GA->>CU: Verify child ↔ adult + time window
+  alt Authorised
+    CU-->>GA: ✅ Photo + name for visual check
+    GA->>CU: Confirm handover
+    CU-->>APP: "Handed to Ravi (uncle) at Gate 2"
+  else Not authorised
+    CU-->>GA: ⛔ Do not release
+    CU-->>APP: 🚨 Alert parent + admin
+  end
+  end
+```
+
+**Bus tracking pipeline, built for the 7:30 am rush:**
+```mermaid
+flowchart LR
+  subgraph SRC["Sources"]
+    D1["📡 AIS-140 device"]
+    D2["📱 Driver app<br/>fallback"]
+    SIM["🧪 Route simulator<br/>demo + load tests"]
+  end
+  SRC -->|ping every 5–10 s| ING["Ingest<br/>normalise · de-jitter"]
+  ING --> POS[("Redis<br/>latest position")]
+  ING --> ETA["ETA engine<br/>polyline + history"]
+  ETA --> GEO{"Geofence rules"}
+  GEO -->|2 stops away| NOTIF["🔔 Parent alert"]
+  GEO -->|arrived · off-route| CUS["🛡️ Custody Chain"]
+  POS --> PS["Pub/Sub per trip"] --> WSG["WebSocket nodes"] --> MAP(["🗺️ Parent live map<br/>own child's bus only"])
+  ING -.->|batched| HIST[("Trip history")]
+
+  classDef src fill:#E0E7FF,stroke:#4F46E5,color:#1E1B4B
+  classDef proc fill:#CFFAFE,stroke:#0891B2,color:#083344
+  classDef store fill:#FEF3C7,stroke:#D97706,color:#451A03
+  classDef out fill:#DCFCE7,stroke:#16A34A,color:#052E16
+  classDef sig fill:#FDE047,stroke:#A16207,stroke-width:3px,color:#422006
+  class D1,D2,SIM src
+  class ING,ETA,GEO,PS,WSG proc
+  class POS,HIST store
+  class NOTIF,MAP out
+  class CUS sig
+  style SRC fill:#6366F10F,stroke:#6366F1,stroke-dasharray:5 5
+```
+- **Hardware first, phone as backup:** many school buses already carry mandated AIS-140 trackers, so AcadStart integrates those instead of selling hardware.
+- **Peak-load math:** 1,500 buses × 1 ping / 5 s ≈ 300 msg/s, which is small. The real peak is ~50,000 parents watching at 7:30 am, handled by horizontally scaled WebSocket nodes, with fallback to a cached 15-second poll.
+- **Privacy by scope:** a parent sees only their own child's bus, only during that trip.
+- **Targets:** map **≤ 10 s** behind reality; ETA error **≤ 3 min**; custody-exception alert **≤ 60 s** after the rule triggers; handover confirmation to the parent **≤ 30 s** after a gate scan.
+
+### 7.6 Voice-first Tamil assistant + two-way translated messaging ⭐
+```mermaid
+sequenceDiagram
+  autonumber
+  actor P as 👨‍👩‍👧 Parent
+  participant W as 💬 WhatsApp
+  participant S as 🗣️ Speech + Translation
+  participant AI as 🤖 Assistant
+  participant T as 🔧 Scoped tools
+  participant TC as 👩‍🏫 Teacher app
+  rect rgba(219, 39, 119, 0.08)
+  Note over P,T: Ask the school by voice
+  P->>W: 🎙️ Voice note in Tamil
+  W->>S: Audio
+  S->>AI: Tamil transcript
+  AI->>T: get_bus_eta(child) · get_fee_dues(child)
+  T-->>AI: Bus 3 is 6 min away · ₹4,500 due 15 Nov
+  AI->>S: Answer text in Tamil
+  S-->>W: 🔊 Voice reply + text
+  W-->>P: Reply in Tamil
+  end
+  rect rgba(79, 70, 229, 0.08)
+  Note over TC,P: Talk to the teacher across languages
+  TC->>S: "Please send the signed form tomorrow" (English)
+  S->>W: Tamil translation, tagged auto-translated
+  W-->>P: Message in Tamil
+  P->>W: 🎙️ Tamil voice reply
+  W->>S: Audio
+  S-->>TC: English text + original Tamil transcript
+  end
+```
+- **Tool-calling, not open data access:** the assistant can only call narrow tools (`get_homework`, `get_attendance`, `get_fee_dues`, `get_bus_eta`, `get_custody_timeline`, `get_circulars`, `get_menu`), and only for children linked to the verified phone number.
+- **Languages:** Tamil, English and code-mixed "Tanglish", by text or voice. Translations are always tagged as automatic, with the original one tap away.
+- **School glossary:** class names, subjects and staff names are kept untranslated, to avoid mistranslating proper nouns.
+- **Escalation:** complaints, sensitive or out-of-scope questions become tickets for the school office.
+- **Cost control:** a small fast model handles routine questions, with a larger model only for complex ones. Common answers (today's menu) are cached, and each school has a message quota.
+- **Targets:** text reply **≤ 5 s**; voice reply **≤ 8 s**; ≥ 70% of routine office queries answered without staff.
+
+### 7.7 Identity and verifiable records
+```mermaid
+sequenceDiagram
+  autonumber
+  participant S1 as 🏫 Current school
+  participant R as 📜 Records service
+  actor G as 👨‍👩‍👧 Guardian
+  participant S2 as 🏫 New school / organiser
+  rect rgba(217, 119, 6, 0.08)
+  Note over S1,G: Issue
+  S1->>R: Issue credential · event, achievement, transfer record
+  R->>R: Sign with school key (Ed25519) + QR
+  R->>G: Appears in the child's wallet
+  end
+  rect rgba(22, 163, 74, 0.08)
+  Note over G,S2: Share with consent
+  S2->>G: Request records
+  G->>R: Approve (OTP) · choose items · set expiry
   R->>S2: Time-limited access link
-  S2->>R: Verify signature + revocation status ✓
-  Note over R: Every issue, share and view is audit-logged
+  S2->>R: Verify signature + revocation ✓
+  end
 ```
-- **Parent-held, consent-based:** records live in the child's wallet, controlled by the guardian. Nothing is shared between institutions without explicit, time-limited, purpose-specific consent.
-- **Verifiable anywhere:** each credential is digitally signed by the issuing school and carries a QR code. Anyone can check authenticity on a public verify page, even if they don't use AcadStart. The format follows the W3C Verifiable Credentials data model.
-- **Complements official systems:** official transfer certificates are issued through the state's system (EMIS in Tamil Nadu). AcadStart's transfer packet *accompanies* the official TC with marks, attendance summary and certificates; it doesn't replace it.
-- **What's never shared by default:** behaviour/conduct remarks and health notes. AcadStart does not build cross-school profiles of children.
-- **Teachers:** a teacher-held verified profile (qualifications, service history confirmed by past schools with consent) is planned for scale-up.
+- **Parent-held, consent-based**, verifiable by anyone via QR (W3C Verifiable Credentials data model).
+- **Complements the official TC** issued through the state system (EMIS in Tamil Nadu); it doesn't replace it.
+- **Never shared by default:** conduct remarks, health notes, custody logs. No cross-school profiles of children.
 
-### 5.7 Management dashboard
-Live tiles for attendance %, fee collection vs. due, buses on the road, open parent tickets and upcoming events. Drill down by class and section. Exports in formats that ease state reporting (EMIS / UDISE+), so staff don't type the same data twice.
+### 7.8 Management dashboard
+Live tiles for attendance %, custody exceptions, buses on the road, fee collection vs. due, unsigned slips and open parent tickets. Drill down by class and section. Exports in EMIS/UDISE+-friendly formats, so staff don't type the same data twice.
 
-## 6. Privacy, security & compliance by design
+## 8. Privacy, security & compliance by design
 | Area | Approach |
 |---|---|
-| **Children's data (DPDP Act 2023 + Rules 2025)** | School = data fiduciary, AcadStart = processor. Verifiable guardian consent flows. Purpose limitation. No tracking or profiling of children beyond education and safety. **No ads, ever.** Data-retention and deletion policies per school. |
-| **Data residency** | All data hosted in India (Mumbai region). |
-| **Tenant isolation** | PostgreSQL row-level security on every table; per-tenant encryption keys for sensitive fields. |
-| **Access control** | Role-based permissions; teachers only see their sections; parents only their own children; all admin actions audit-logged. |
-| **Security** | TLS everywhere, encryption at rest, OTP rate limiting, signed webhooks, secrets in a vault, dependency scanning, **third-party security audit (VAPT) before any real student data**. |
-| **Fee regulation** | Approved-fee-heads lock, approval references, public fee disclosure, no parent-side app fees. |
-| **Transport** | Integrates AIS-140 devices; live location visible only to guardians of children on that trip, only during the trip. |
-| **Payments** | Licensed payment gateway; settlement direct to the school; AcadStart never holds funds. |
-| **Prototype rule** | **Synthetic data only** until security review and legal review of consent flows are done. |
+| **Children's data (DPDP Act 2023 + Rules 2025)** | School = data fiduciary, AcadStart = processor. Verifiable guardian consent. Purpose limitation to education and child safety. **No ads, no profiling or behaviour scoring of children, no facial recognition.** |
+| **Custody Chain data** | Handover and location logs visible only to the child's guardians and authorised staff. Detailed logs kept for a short, configurable window (default 90 days), then summarised. Pickup photos encrypted and shown only at the gate during verification. |
+| **Voice and images** | Voice notes deleted after transcription (default 24 h). Scanned register images deleted after confirmation + a short retention window. AI providers are contractually barred from training on school data. |
+| **Data residency** | All data hosted in India. |
+| **Tenant isolation** | PostgreSQL row-level security; per-tenant encryption keys for sensitive fields. |
+| **Access control** | Role-based; teachers see only their sections, parents only their children, gate staff only dismissal verification. All admin actions are audit-logged. |
+| **Security** | TLS, encryption at rest, OTP rate limits, signed webhooks, secrets vault, dependency scanning, **third-party security audit (VAPT) before any real data**. |
+| **Fee regulation** | Approved-heads lock, approval references, public disclosure, no parent-side app fees. |
+| **Payments** | Licensed gateway; direct settlement to the school; AcadStart never holds funds. |
+| **Prototype rule** | **Synthetic data only** until the security audit and legal review of consent flows are done. |
 
-## 7. Game plan
+## 9. Game plan
 ```mermaid
 gantt
-  title AcadStart: prototype to pilot (indicative)
-  dateFormat  YYYY-MM-DD
-  axisFormat  %b %Y
+  title AcadStart · prototype to pilot (indicative)
+  dateFormat YYYY-MM-DD
+  axisFormat %b %Y
   section Phase 0 · Validate
-  Clickable demo (M0)              :p0a, 2026-11-15, 21d
+  Clickable demo M0                      :active, p0a, 2026-11-15, 21d
   School conversations and pilot commitments :p0b, 2026-11-25, 75d
   section Phase 1 · Prototype
-  M1 Foundation                    :p1a, 2026-12-15, 21d
-  M2 Daily core                    :p1b, after p1a, 21d
-  M3 Fees & payments               :p1c, after p1b, 28d
-  M4 Bus tracking                  :p1d, after p1c, 21d
-  M5 WhatsApp + AI assistant       :p1e, after p1d, 21d
-  M6 Identity & records            :p1f, after p1e, 21d
+  M1 Foundation + Snap-to-Digitise       :p1a, 2026-12-01, 25d
+  M2 Daily core + Digital diary          :p1b, after p1a, 21d
+  M3 Fees and payments                   :p1c, after p1b, 25d
+  M4 Transport + Custody Chain           :crit, p1d, after p1c, 28d
+  M5 Voice assistant + translation       :crit, p1e, after p1d, 21d
+  M6 Identity and records                :p1f, after p1e, 18d
   section Phase 2 · Pilot
-  Security audit + legal review    :p2a, 2027-04-15, 30d
-  Pilot onboarding                 :p2b, 2027-05-01, 35d
-  Go-live with academic year       :milestone, 2027-06-04, 0d
+  Security audit and legal review        :p2a, 2027-04-20, 30d
+  Pilot onboarding                       :p2b, 2027-05-05, 30d
+  Go-live with academic year             :milestone, 2027-06-04, 0d
   section Phase 3 · Scale-up
-  Exams, report cards, marketplace and more :p3, 2027-07-01, 180d
+  Next-tier features and new districts   :p3, 2027-07-01, 180d
 ```
 
 ### Phase 0: Validate (now → Feb 2027)
-- **Build:** M0 clickable demo covering every role.
-- **Do:** walk ~10–15 private schools (Coimbatore and Chennai first) through the demo; record their top pains, current tools and who decides.
-- **Exit criteria:** **≥ 5 schools committed to a pilot** for the June 2027 academic year. If not met, revisit scope or wedge before writing production code.
+- **Build:** M0 clickable demo, leading with the Custody Chain timeline, a Tamil voice-note exchange and a Snap-to-Digitise run.
+- **Do:** demo to ~10–15 private schools (Coimbatore and Chennai first); capture their top pains, current tools and decision makers.
+- **Exit criteria:** **≥ 5 schools committed to a pilot** for the June 2027 academic year. Otherwise revisit scope before writing production code.
 
 ### Phase 1: Prototype (Dec 2026 → Apr 2027)
-Build M1 to M6 as working software on synthetic data, one module at a time, each with:
-- A demo script and seed data for a fictional Tamil Nadu school.
-- Automated tests for the critical paths (fee lock, payment webhooks, consent and sharing, tenant isolation).
-- Load tests for the bus-tracking morning peak.
-- **Exit criteria:** a full simulated school day runs end to end. Morning attendance, homework, a fee paid via UPI test mode, two buses tracked live, a parent asking the assistant in Tamil, and a certificate issued and verified by QR.
+Build M1 → M6 on synthetic data, one module at a time, each with a demo script, seed data for a fictional Tamil Nadu school, automated tests for critical paths (fee lock, webhooks, consent, tenant isolation, custody exception rules) and load tests for the morning peak.
+**Exit criteria:** a full simulated school day runs end to end:
+- A paper register is snapped and imported.
+- Attendance is marked offline and synced.
+- A permission slip is signed.
+- A fee is paid by UPI (test mode).
+- Two buses are tracked, and the Custody Chain completes for a class, with one simulated exception caught.
+- A parent asks by Tamil voice note and a teacher replies in English.
+- A certificate is issued and verified by QR.
 
 ### Phase 2: Pilot (Apr → Jul 2027)
-- Third-party security audit; legal review of consent flows and data-processing agreements.
-- On-ground onboarding: data import, teacher training (≤ 1 hour), parent app rollout via WhatsApp invite links.
-- Weekly feedback loop with each pilot school.
-- **Exit criteria (first 8 weeks live):** ≥ 70% of parents active weekly; ≥ 60% of fees collected online; absence alerts on ≥ 90% of school days; school-office queries noticeably reduced; no data-isolation incidents.
+- Security audit; legal review of consent flows and data-processing agreements.
+- On-ground onboarding with Snap-to-Digitise; teacher training (≤ 1 hour); gate staff training (≤ 30 min); parent rollout via WhatsApp invite links.
+- **Exit criteria (first 8 weeks):** ≥ 70% of parents active weekly; ≥ 60% of fees paid online; custody timeline complete for ≥ 95% of bus-riding students; ≥ 80% slip sign-off within deadline; zero data-isolation incidents.
 
 ### Phase 3: Scale-up (from Jul 2027)
-Expand by district cluster, add the modules pilot schools ask for most (see below), harden infrastructure, and extend to Puducherry and further states with configurable regional rules.
+Grow by district cluster, ship the most-requested items below, harden infrastructure, and add Puducherry and further states through configurable regional compliance packs.
 
-## 8. Scale-up features (open-ended)
-> This list is **intentionally open-ended**: it grows with what schools, parents and teachers actually ask for. Priorities are set by pilot feedback, not by this order. Have an idea? Open an issue with the `feature-idea` label.
+## 10. Scale-up features (open-ended)
+> This list is **intentionally open-ended**: it grows with what schools, parents and teachers actually ask for. Pilot feedback sets the priorities, not this order. Have an idea? Open an issue with the `feature-idea` label.
+
+**Next tier (first candidates after the pilot)**
+- [ ] **Fee AutoPay + sibling wallet**: UPI AutoPay mandates for monthly or term fees, one account for all children (even across AcadStart schools), reminders timed to salary dates
+- [ ] **State Sync Pack**: enter once, generate ready-to-upload EMIS/UDISE+ files with a "what's due" checklist
+- [ ] **Parent learning nudges**: 2–3 short Tamil/English messages a week on what the child is learning and a 5-minute home activity
+- [ ] **Attendance nudges**: research-informed, non-shaming outreach to parents of frequently absent children, with teacher escalation
+- [ ] **NEP Holistic Progress Card**: learning-outcome (mastery) gradebook with self, peer and parent inputs
+- [ ] **Teacher Copilot**: lesson-plan drafts from the syllabus calendar, worksheets from the exact chapter, report-card remark drafts (teacher approves)
+- [ ] **Verified Event Passport**: inter-school events and olympiads registered with verified records, results issued back as credentials
 
 **Academics**
-- [ ] Exams, marks entry and report cards (State Board, CBSE and ICSE formats; holistic progress cards)
-- [ ] AI-drafted report-card remarks (teacher reviews and approves)
+- [ ] Exams, marks entry and report cards (State Board, CBSE and ICSE formats)
 - [ ] Automatic timetable generation (constraint solver) and substitution management
-- [ ] Lesson plans and curriculum coverage tracking
-- [ ] Question-paper and worksheet generator aligned to the syllabus
+- [ ] Curriculum coverage tracking
 - [ ] LMS: study material, online classes, quizzes
-- [ ] Co-curricular and sports records; house system and points
+- [ ] Co-curricular and sports records; house points
 
 **Parents & students**
-- [ ] School-supplies marketplace: booklists, uniforms and stationery from local vendors, **parent's free choice**, transparent pricing, kept fully separate from school fees
+- [ ] School-supplies marketplace: booklists, uniforms and stationery from local vendors, **parent's free choice**, transparent pricing, fully separate from school fees
 - [ ] Parent–teacher meeting scheduling
-- [ ] Leave requests and early pick-up authorisation (with gate verification)
+- [ ] Leave requests and early pick-up requests (into Safe Handover)
 - [ ] Cafeteria pre-orders, allergy flags and canteen wallet
-- [ ] Student portfolio and achievements timeline in the records wallet
-- [ ] Multi-language support beyond Tamil and English (Hindi, Malayalam, Telugu, Kannada, …)
+- [ ] Student portfolio and achievements timeline
+- [ ] More languages (Hindi, Malayalam, Telugu, Kannada, …)
 
-**Transport & safety**
-- [ ] RFID/NFC boarding check-in, with alerts to parents when the child boards or alights
+**Safety & transport**
+- [ ] RFID/NFC cards as extra Custody Chain scan methods
+- [ ] SOS/panic-button integration with AIS-140 devices
+- [ ] Anonymous safe-reporting channel for students and parents to the counsellor or POCSO committee
+- [ ] Visitor management and gate passes
 - [ ] Driver behaviour analytics (speeding, harsh braking) from device data
 - [ ] Route optimisation for new admissions
-- [ ] SOS/panic-button integration with AIS-140 devices
-- [ ] Visitor management and gate passes
 
 **Management & operations**
-- [ ] Admissions CRM: enquiries, applications, follow-ups, online admission forms
-- [ ] HR, staff attendance and payroll (via integrations with payroll providers)
-- [ ] Library, inventory, assets and hostel management
+- [ ] Admissions CRM: enquiries, applications, follow-ups
+- [ ] HR, staff attendance and payroll (via payroll-provider integrations)
+- [ ] Library, inventory, assets and hostel
 - [ ] Multi-campus and school-chain dashboards
-- [ ] Fee-default prediction and gentle reminder sequencing (parent-level, no child profiling)
-- [ ] Fee instalment/EMI options via licensed financing partners
+- [ ] Fee instalments/EMI via licensed financing partners
 - [ ] Accounting exports (Tally etc.) and GST-ready reports
 
-**Identity & records**
-- [ ] Teacher-held verified profile (qualifications and service history)
+**Identity, records & openness**
+- [ ] Teacher-held verified profile (qualifications and service history, consent-based)
 - [ ] DigiLocker integration (subject to approval as a partner)
-- [ ] Deeper state-system interoperability (EMIS, UDISE+, APAAR), subject to official access
-- [ ] Inter-school event and competition registrations using verified credentials
-- [ ] Alumni records and verified transcripts for higher education
+- [ ] Deeper EMIS / UDISE+ / APAAR interoperability, subject to official access
+- [ ] Open API + webhooks on an open data standard, with one-click full export (no lock-in)
+- [ ] Alumni records and verified transcripts
 
 **Platform**
-- [ ] OCR + AI digitisation of paper registers for faster onboarding
-- [ ] Offline-first for all teacher workflows
-- [ ] Open API and webhooks for third-party integrations
-- [ ] White-label apps for large school chains
-- [ ] Higher-education edition (colleges: credits, semesters, placements)
-- [ ] Puducherry, then other states, via configurable regional compliance packs
+- [ ] White-label apps for school chains
+- [ ] Higher-education edition (credits, semesters, placements)
+- [ ] Puducherry, then other states, via regional compliance packs
 - [ ] _…your idea here_
 
-## 9. Tech stack
+## 11. Tech stack
 | Layer | Choice | Why |
 |---|---|---|
-| Mobile app | **Flutter** (one app, role-based views) | Single codebase for Android and iOS; performs well on low-end 2 GB Android phones; offline storage via SQLite |
-| Web admin | **Next.js + TypeScript + Tailwind** | Fast to build, good for data-heavy admin screens |
-| Backend | **Python (FastAPI)**, as a modular monolith | Strong AI/ML ecosystem, typed, async; one deployable to start |
-| Database | **PostgreSQL** with row-level security | Relational integrity for fees and records; tenant isolation in the database |
-| Cache / realtime | **Redis** (pub/sub, queues, live positions) | Keeps the bus-tracking hot path out of the main DB |
-| Realtime transport | **WebSockets**; **MQTT/TCP** ingest for GPS devices | Standard for live maps; matches device protocols |
-| Maps & routing | **OpenStreetMap + OSRM** (self-hosted), optional commercial maps | Keeps map costs predictable at scale |
-| Messaging | **WhatsApp Business API**, FCM/APNs push, DLT-registered SMS fallback | WhatsApp is where Indian parents already are |
+| Mobile app | **Flutter** (one app, role-based views incl. gate mode) | One codebase for Android and iOS; fast on 2 GB Android phones; offline SQLite; camera and QR built in |
+| Web admin | **Next.js + TypeScript + Tailwind** | Fast to build data-heavy admin screens |
+| Backend | **Python (FastAPI)** as a modular monolith | Strong AI ecosystem, typed, async |
+| Database | **PostgreSQL** + row-level security | Integrity for fees, custody and records; tenant isolation in the DB |
+| Realtime | **Redis** pub/sub + **WebSockets**; **MQTT/TCP** device ingest | Live maps and custody events without touching the main DB |
+| Maps | **OpenStreetMap + OSRM** (self-hosted), optional commercial maps | Predictable costs |
+| Messaging | **WhatsApp Business API**, FCM/APNs push, DLT-registered SMS fallback | Parents already live on WhatsApp |
 | Payments | **Licensed Indian payment gateway** (UPI, cards, netbanking) | Direct settlement to schools |
-| AI | **LLM API with tool-calling** (small model for routine queries, larger for complex) | Tamil/English understanding; strict tool scoping |
-| Credentials | **Ed25519 signatures**, W3C Verifiable Credentials data model, QR verification | Standard, verifiable without the platform |
-| Infra | Docker; India-region cloud; CI via GitHub Actions | Simple to start, scales by splitting modules |
-| Observability | Structured logs, metrics, tracing, uptime alerts | The morning peak must never surprise us |
+| AI: assistant | **LLM with tool-calling** (small model for routine, larger for complex) | Strict tool scoping; Tamil/English |
+| AI: speech | **Tamil/English STT + TTS** (cloud APIs or Indic open models such as AI4Bharat) | Voice-first parents |
+| AI: translation | **LLM or Indic MT models** (e.g., IndicTrans2) with a school glossary | Accurate names and school terms |
+| AI: vision | **Vision-language model + OCR** with roster matching | Snap-to-Digitise |
+| Credentials | **Ed25519**, W3C Verifiable Credentials, QR | Verifiable without the platform |
+| Infra | Docker, India-region cloud, GitHub Actions CI | Simple start; split modules as needed |
+| Observability | Structured logs, metrics, tracing, uptime alerts | The morning rush must never surprise us |
 
-## 10. Planned repository layout
+## 12. Planned repository layout
 ```
 acadstart/
 ├── apps/
-│   ├── mobile/          # Flutter app (parent · teacher · student · driver)
-│   ├── admin-web/       # Next.js admin panel
-│   └── demo/            # M0 clickable demo
+│   ├── mobile/            # Flutter app: parent · teacher · student · driver · gate
+│   ├── admin-web/         # Next.js admin panel
+│   └── demo/              # M0 clickable demo
 ├── services/
-│   └── api/             # FastAPI modular monolith
-│       ├── identity/    ├── academics/   ├── communication/
-│       ├── fees/        ├── transport/   ├── records/
-│       └── assistant/
+│   └── api/               # FastAPI modular monolith
+│       ├── identity/      ├── academics/     ├── communication/
+│       ├── fees/          ├── transport/     ├── custody/
+│       ├── records/       └── ai/            # assistant · speech · translation · digitise
 ├── tools/
-│   ├── route-simulator/ # replays bus routes for demos and load tests
-│   └── seed-data/       # synthetic Tamil Nadu school data
-├── infra/               # docker-compose, deployment, CI
-└── docs/                # architecture decisions (ADRs), API docs, runbooks
+│   ├── route-simulator/   # replays bus routes for demos and load tests
+│   └── seed-data/         # synthetic Tamil Nadu school (incl. sample paper registers)
+├── infra/                 # docker-compose, deployment, CI
+└── docs/                  # ADRs, API docs, runbooks
 ```
 
-## 11. Non-functional targets
+## 13. Non-functional targets
 | Metric | Prototype target |
 |---|---|
 | API latency (p95) | ≤ 300 ms |
-| Bus position freshness on parent screen | ≤ 10 s |
+| Bus position freshness on the parent map | ≤ 10 s |
+| Handover confirmation to the parent after a gate scan | ≤ 30 s |
+| Custody exception alert after the rule triggers | ≤ 60 s |
 | Concurrent parent viewers at peak | 50,000 (load-tested) |
 | Payment receipt after capture | ≤ 10 s |
-| AI assistant reply | ≤ 5 s |
+| Assistant reply (text / voice) | ≤ 5 s / ≤ 8 s |
+| Snap-to-Digitise: 40-row page reviewed and committed | < 2 min, ≥ 95% cells correct pre-review |
 | Mobile app install size | ≤ 30 MB |
-| Works on | Android 8+ phones with 2 GB RAM on 4G; attendance works offline |
+| Devices | Android 8+ with 2 GB RAM on 4G; attendance works offline |
 | School onboarding | 1,000-student school live in 1 working day |
-| Availability (pilot) | 99.5% monthly, higher during 7–9 am and 2–5 pm |
+| Availability (pilot) | 99.5% monthly, prioritised for 7–9 am and 2–5 pm |
 
-## 12. Glossary
+## 14. Glossary
 | Term | Meaning |
 |---|---|
-| **AIS-140** | Indian standard for vehicle location tracking devices and emergency buttons on public and school transport |
+| **AIS-140** | Indian standard for vehicle tracking devices and emergency buttons in public and school transport |
 | **APAAR ID** | "One Nation One Student" academic ID, generated with parental consent |
-| **DPDP Act** | Digital Personal Data Protection Act 2023, India's data-protection law, with special rules for children's data |
-| **EMIS** | Tamil Nadu's Educational Management Information System, the state's student/school system of record |
+| **Custody Chain** | AcadStart's verified, door-to-door log of who is responsible for a child at each point of the school day |
+| **DPDP Act** | Digital Personal Data Protection Act 2023, India's data-protection law, with special rules for children |
+| **EMIS** | Tamil Nadu's Educational Management Information System, the state's system of record for students and schools |
 | **UDISE+** | National school database; issues school codes and student numbers (PEN) |
 | **TC** | Transfer Certificate, issued when a student leaves a school |
-| **Fee committee** | State body that fixes or approves private school fees (Tamil Nadu has one) |
+| **Fee committee** | State body that fixes or approves private-school fees |
 | **Verifiable credential** | A digitally signed record whose authenticity can be checked independently |
 
-## 13. Contributing & license
-This project is in its design phase and not yet open for code contributions. Feedback and ideas are welcome via **Issues** (`feature-idea`, `question`).
+## 15. Contributing & license
+The project is in its design phase and not yet open for code contributions. Feedback and ideas are welcome via **Issues** (`feature-idea`, `question`).
 
 **License:** not yet chosen. Until a license is added, all rights are reserved by the author.
 
 ---
-_Maintained by [@Vijay190899](https://github.com/Vijay190899)._
+<div align="center"><sub>Maintained by <a href="https://github.com/Vijay190899">@Vijay190899</a></sub></div>
